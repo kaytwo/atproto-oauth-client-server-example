@@ -1,0 +1,26 @@
+{
+  "name": "atproto-oauth-client-server-example",
+  "version": "1.0.0",
+  "main": "app.ts",
+  "scripts": {
+    "start": "tsx app.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "author": "Chris Kanich",
+  "license": "MIT",
+  "description": "Example express app using ATPROTO OAuth",
+  "dependencies": {
+    "@atproto/api": "^0.13.18",
+    "@atproto/jwk-jose": "^0.1.2",
+    "@atproto/oauth-client-node": "^0.2.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "tsx": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.9.2"
+  }
+}
