@@ -4,6 +4,7 @@
   "main": "app.ts",
   "scripts": {
     "start": "tsx app.ts",
+    "keys": "tsx generate.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "type": "module",
@@ -11,16 +12,17 @@
   "license": "MIT",
   "description": "Example express app using ATPROTO OAuth",
   "dependencies": {
-    "@atproto/api": "^0.13.18",
-    "@atproto/jwk-jose": "^0.1.2",
-    "@atproto/oauth-client-node": "^0.2.1",
-    "dotenv": "^16.4.5",
-    "express": "^4.21.1",
-    "tsx": "^4.19.2"
+    "@atproto/api": "^0.15.3",
+    "@atproto/jwk-jose": "^0.1.6",
+    "@atproto/oauth-client-node": "^0.2.16",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jose": "^6.0.10",
+    "tsx": "^4.19.3"
   },
   "devDependencies": {
-    "@types/dotenv": "^6.1.1",
-    "@types/express": "^5.0.0",
-    "@types/node": "^22.9.2"
+    "@types/dotenv": "^8.2.3",
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.14.1"
   }
 }

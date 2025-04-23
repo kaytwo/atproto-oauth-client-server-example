@@ -1,25 +1,45 @@
-import { generateKeyPair } from "jose";
+/*
+Script for generating atproto oauth keys in the format used by @atproto/oauth-client-node
+Usage:
+  pnpm install jose tsx
+  pnpm tsx generate-keys.ts
 
-async function serializeKeyToJwk() {
-  // Generate an RSA key pair
-  const { publicKey, privateKey } = await generateKeyPair("RS256");
+Copy the output into your .env file, and then use the PRIVATE_KEY_1, PRIVATE_KEY_2, PRIVATE_KEY_3 in
+your NodeOauthClient.
+*/
 
-  // Export keys as JWK
-  const publicJwk = await import("jose").then((lib) =>
-    lib.exportJWK(publicKey)
-  );
-  const privateJwk = await import("jose").then((lib) =>
-    lib.exportJWK(privateKey)
-  );
+import { generateKeyPair, exportJWK } from "jose";
 
-  // Convert to JSON strings
-  const publicJwkString = JSON.stringify(publicJwk);
-  const privateJwkString = JSON.stringify(privateJwk);
+async function generateAndPrintKey(keyNumber: number) {
+  try {
+    // Generate an ECDSA P-256 key pair with extractable privateKey
+    const { publicKey, privateKey } = await generateKeyPair("ES256", {
+      extractable: true,
+    });
 
-  // save 3 of these to PRIVATE_KEY_X env vars
-  console.log(privateJwkString);
+    // Export key as JWK
+    const privateJwk = await exportJWK(privateKey);
 
-  return { publicJwkString, privateJwkString };
+    // Convert to JSON string
+    const privateJwkString = JSON.stringify(privateJwk);
+
+    // Print in .env format
+    console.log(`PRIVATE_KEY_${keyNumber}=${privateJwkString}`);
+
+    return privateJwkString;
+  } catch (error) {
+    console.error(`Error generating key ${keyNumber}:`, error);
+  }
 }
 
-serializeKeyToJwk();
+async function generateAllKeys() {
+  // Generate three separate keys
+  await generateAndPrintKey(1);
+  await generateAndPrintKey(2);
+  await generateAndPrintKey(3);
+}
+
+// Run the function
+generateAllKeys().catch((error) => {
+  console.error("Failed to generate keys:", error);
+});
